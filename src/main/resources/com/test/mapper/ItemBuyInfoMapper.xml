@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.ItemBuyInfoMapper">
+    <select id="selectItemRank" resultType="java.lang.String">
+        select item from (
+            select item, count(*) as cnt
+            from smartcar_item_buy_list
+            group by item order by cnt desc
+        ) a
+    </select>
+    <select id="selectItemBuyCountByGen" resultType="java.lang.Integer">
+        select count(*) from smartcar_item_buy_list
+        where item = #{item} and gen=#{gen}
+    </select>
+    <select id="selectItemBuyCountAgeList" resultType="java.lang.Integer">
+        select count(*) from smartcar_item_buy_list
+        where item = #{item} and cast(age as int) between 20 and 29
+        union all 
+        select count(*) from smartcar_item_buy_list
+        where item = #{item} and cast(age as int) between 30 and 39
+        union all 
+        select count(*) from smartcar_item_buy_list
+        where item = #{item} and cast(age as int) between 40 and 49
+        union all 
+        select count(*) from smartcar_item_buy_list
+        where item = #{item} and cast(age as int) between 50 and 59
+        union all 
+        select count(*) from smartcar_item_buy_list
+        where item = #{item} and cast(age as int) between 60 and 69
+        union all 
+        select count(*) from smartcar_item_buy_list
+        where item = #{item} and cast(age as int) between 70 and 100
+    </select>
+    <select id="selectItemAvgScore" resultType="java.lang.Double">
+        select score from (
+        	select item, avg(cast(score as int)) as score from smartcar_item_buy_list
+        	group by item
+        ) a where a.item = #{item}
+    </select>
+    <select id="selectItemBuyCountByRegion" resultType="java.lang.Integer">
+        select count(*) from smartcar_item_buy_list
+        where region=#{region} and item=#{item}
+    </select>
+    <select id="selectItemCntGrpBygen" resultType="java.lang.Integer">
+        select count(*) from smartcar_item_buy_list
+        where item = #{item} and gen='남'
+        union all
+        select count(*) from smartcar_item_buy_list
+        where item = #{item} and gen='여'
+    </select>
+</mapper>

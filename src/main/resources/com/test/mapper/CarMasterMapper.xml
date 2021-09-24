@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.CarMasterMapper">
+    <select id="selectAgesCount" resultType="java.lang.Integer">
+        select count(*) from smartcar_master smartcar_master 
+        <![CDATA[ where cast(age as int) >= 20 and cast(age as int) < 30 ]]>
+        union all   
+        select count(*) from smartcar_master smartcar_master 
+        <![CDATA[ where cast(age as int) >= 30 and cast(age as int) < 40 ]]>
+        union all
+        select count(*) from smartcar_master smartcar_master 
+        <![CDATA[ where cast(age as int) >= 40 and cast(age as int) < 50 ]]>
+        union all
+        select count(*) from smartcar_master smartcar_master 
+        <![CDATA[ where cast(age as int) >= 50 and cast(age as int) < 60 ]]>
+        union all
+        select count(*) from smartcar_master smartcar_master 
+        <![CDATA[ where cast(age as int) >= 60 and cast(age as int) < 70 ]]>
+        union all
+        select count(*) from smartcar_master smartcar_master 
+        where cast(age as int) >= 70
+    </select>
+    <select id="selectAgesCountByRegion" resultType="java.lang.Integer">
+        select count(*) from smartcar_master
+        where region=#{region} and cast(age as int) between 20 and 29
+        union all
+        select count(*) from smartcar_master
+        where region=#{region} and cast(age as int) between 30 and 39
+        union all
+        select count(*) from smartcar_master
+        where region=#{region} and cast(age as int) between 40 and 49
+        union all
+        select count(*) from smartcar_master
+        where region=#{region} and cast(age as int) between 50 and 59
+        union all
+        select count(*) from smartcar_master
+        where region=#{region} and cast(age as int) between 60 and 69
+        union all
+        select count(*) from smartcar_master
+        where region=#{region} and cast(age as int) >= 70;
+    </select>
+    <select id="selectRegions" resultType="java.lang.String">
+        select region from smartcar_master group by region
+    </select>
+    <select id="selectCarYearCount" resultType="java.lang.Integer">
+        select count(*) from smartcar_master
+        where cast(car_year as int) between 2013 and 2016
+        union all 
+        select count(*) from smartcar_master
+        where cast(car_year as int) between 2008 and 2012
+        union all 
+        select count(*) from smartcar_master
+        where cast(car_year as int) between 2000 and 2007
+    </select>
+    <select id="selectCarYearCountByRegion" resultType="java.lang.Integer">
+        select count(*) from smartcar_master
+        where cast(car_year as int) between 2013 and 2016
+        and region = #{region}
+        union all 
+        select count(*) from smartcar_master
+        where cast(car_year as int) between 2008 and 2012
+        and region = #{region}
+        union all 
+        select count(*) from smartcar_master
+        where cast(car_year as int) between 2000 and 2007
+        and region = #{region}
+    </select>
+</mapper>

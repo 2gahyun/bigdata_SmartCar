@@ -1,0 +1,19 @@
+/* assets/css/item_view.css */
+* {margin: 0; padding: 0; font-size: 1em; font-weight: normal;}
+li {list-style: none;}
+img {vertical-align: middle;}
+
+.container {padding: 0 20px; overflow: hidden;}
+.container > div {float: left;}
+.item_rank_wrap {height: 90vh; border: 1px solid #000; width: 200px; margin-left: 20px; overflow-y: scroll; margin-right: 20px;}
+.rank_item {padding: 10px;cursor: pointer;}
+.rank_item:hover {background-color: #999; color: #fff;}
+.rank_item.selected {background-color: #333; color: #fff;}
+
+.pie_chart_container {width: 250px; text-align: center; display: inline-block; vertical-align: top;}
+
+.item_score_wrap {width: 250px; height: 30px; border: 1px solid #abf;}
+.item_score_prog {height: 100%; background-color: #abf; color: #fff; width: 0%; position: relative; overflow: hidden;
+    transition:width 0.3s;
+}
+.item_score_prog span {position: absolute; font-weight: bold; right: 10px; top: 3px;}

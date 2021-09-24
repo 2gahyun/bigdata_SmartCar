@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.DriveInfoMapper">
+    <select id="selectDriveInfo" resultType="com.test.vo.DriveInfoVO">
+        select 
+        	car_number,
+        	avg(cast(age as int)) as age,
+        	avg(cast(speed_pedal as int)) as speed_pedal,
+        	avg(cast(break_pedal as int)) as break_pedal,
+        	avg(cast(speed as int)) as speed
+        from smartcar_drive_info
+        group by car_number
+        order by car_number
+    </select>
+</mapper>

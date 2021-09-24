@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.SmartCarMapper">
+    <select id="selectSmartCarSymptomInfo" resultType="com.test.vo.SymptomInfoVO">
+        select * from smartcar_symptom_info;
+    </select>
+    <select id="selectSmartCarSymptomCount" resultType="java.lang.Integer">
+        select count(*) from smartcar_symptom_info
+    </select>
+    <select id="selectAbnormalCount" resultType="java.lang.Integer">
+        select count(*) from smartcar_symptom_info
+        <if test="col == 'speed'">
+            where speed_p_symptom = 'abnormal';
+        </if>
+        <if test="col == 'break'">
+            where break_p_symptom = 'abnormal';
+        </if>
+        <if test="col == 'steer'">
+            where steer_p_symptom = 'abnormal';
+        </if>
+    </select>
+</mapper>
